@@ -6,20 +6,22 @@ import {
   faUser,
 } from "@fortawesome/free-solid-svg-icons";
 
+
+
 export const dataLeft = [
   {
     icon: faPhone,
-    text: "+021 - 95 - 51 - 84",
+    text: "+963 943 537 522",
     link: "#",
   },
   {
     icon: faEnvelope,
-    text: "email@email.com",
+    text: "tawfek96Kahlous@gmail.com",
     link: "#",
   },
   {
     icon: faMapMarker,
-    text: "1734 Stonecoal Road",
+    text: "Syria-Damascus",
     link: "#",
   },
 ];

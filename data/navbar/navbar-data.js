@@ -1,24 +1,22 @@
-
 export const navbarData = [
   {
     title: "Home",
-    link: "#",
+    link: "/home",
   },
   {
     title: "Electronics",
-    link: "#",
+    link: "/category/electronics",
   },
   {
     title: "Jewelery",
-    link: "#",
+    link: "/category/jewelery",
   },
   {
     title: "Men's clothing",
-    link: "#",
+    link: "/category/men's clothing",
   },
-
   {
     title: "Women's clothing",
-    link: "#",
+    link: "/category/women's clothing",
   },
 ];

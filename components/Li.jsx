@@ -1,13 +1,16 @@
 import React from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import Link from "next/link";
-
+import { useRouter } from "next/router";
 const Li = ({ icon, text, link, onClick }) => {
+  const router = useRouter();
   return (
     <>
-      <li className="ml-2 sm:ml-4 " onClick={onClick}>
+      <li
+        onClick={onClick} className="ml-[10px]"
+      >
         <Link
-          className=" text-xs hover:text-first-color hover:duration-500"
+          className="text-xs hover:text-first-color hover:duration-500 "
           href={link}
         >
           <FontAwesomeIcon

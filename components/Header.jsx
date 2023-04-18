@@ -5,9 +5,9 @@ import { dataLeft,dataRight } from "@/data/header-data/header-data";
 
 const Header = () => {
   return (
-    <div className=" py-2 bg-header-color">
-      <div className="xl:w-[1170px] lg:w-[910px] w-[95%] mx-auto ">
-        <div className="flex  flex-col sm:items-center md:justify-between md:flex-row text-white ">
+    <div className="py-2 bg-header-color">
+      <div className="wrapper ">
+        <div className="flex flex-col sm:items-center md:justify-between md:flex-row text-white ">
           <ul className=" sm:flex sm:justify-start ">
             {dataLeft.map((item, key) => {
               return (
@@ -16,7 +16,6 @@ const Header = () => {
                   icon={item.icon}
                   text={item.text}
                   link={item.link}
-                  isLine={false}
                 />
               );
             })}
