@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import Header from "./Header";
-import Menu from "./menu";
+import Menu from "./Menu";
 import Search from "./Search";
 
 const Navbar = () => {

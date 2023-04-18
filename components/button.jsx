@@ -19,17 +19,19 @@ const Button = ({
   fontWeight,
   borderHover,
   onClick,
-  dispaly
+  dispaly,
+  disabled,
 }) => {
   return (
-    
     <>
       {/* <Link href={"/products"}>
       </Link> */}
 
       <button
-        className={className} onClick={onClick}
+        className={className}
+        onClick={onClick}
         type={type}
+        disabled={disabled}
       >
         {text}
       </button>

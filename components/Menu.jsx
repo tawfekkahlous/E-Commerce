@@ -1,9 +1,8 @@
 import React from "react";
-import { navbarData } from "@/data/navbar/navbar-data";
 import Li from "./Li";
+import { navbarData } from "@/data/navbar/navbar-data";
 import { useRouter } from "next/router";
 import Link from "next/link";
-import Button from "./button";
 
 const Menu = ({ menu, handleToogle }) => {
   const router = useRouter();
@@ -15,8 +14,8 @@ const Menu = ({ menu, handleToogle }) => {
             {navbarData.map((item, key) => {
               return (
                 <Li
-                  onClick={handleToogle}
                   key={key}
+                  onClick={handleToogle}
                   text={item.title}
                   link={item.link}
                   icon={item.icon}
