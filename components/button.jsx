@@ -47,7 +47,7 @@ const Button = ({
         transition:0.3s;
         font-size:${fontSize};
         font-weight:${fontWeight};
-        display:${dispaly}
+        display:${dispaly};
       }
       button.${className}:hover {
         background-color:${hoverBg};

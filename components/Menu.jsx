@@ -6,6 +6,10 @@ import Link from "next/link";
 
 const Menu = ({ menu, handleToogle }) => {
   const router = useRouter();
+  const handleLogout=() => {
+    localStorage.removeItem("login-token");
+    router.push("/");
+  }
   return (
     <>
       <div className="py-2 md:border-b-[#E4E7ED] md:border-[2px] ">
@@ -18,7 +22,6 @@ const Menu = ({ menu, handleToogle }) => {
                   onClick={handleToogle}
                   text={item.title}
                   link={item.link}
-                  icon={item.icon}
                 />
               );
             })}
@@ -30,7 +33,10 @@ const Menu = ({ menu, handleToogle }) => {
               </button>
             </Link>
             <Link href="/">
-              <button className="logout mx-[10px]  font-[500] relative hover:text-first-color">
+              <button
+                className="logout mx-[10px]  font-[500] relative hover:text-first-color"
+                onClick={handleLogout}
+              >
                 Logout
               </button>
             </Link>
@@ -69,7 +75,7 @@ const Menu = ({ menu, handleToogle }) => {
                         font-weight: normal;
                     }
                     .overlay{
-                        position : absolute;
+                        position : fixed;
                         top :0;
                         left : 0;
                         height : 100%;

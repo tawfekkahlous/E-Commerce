@@ -7,7 +7,7 @@ const Header = () => {
   return (
     <div className="py-2 bg-header-color">
       <div className="wrapper ">
-        <div className="flex flex-col sm:items-center md:justify-between md:flex-row text-white ">
+        <div className="flex  sm:items-center md:justify-between md:flex-row text-white ">
           <ul className=" sm:flex sm:justify-start ">
             {dataLeft.map((item, key) => {
               return (

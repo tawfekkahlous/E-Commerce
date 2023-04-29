@@ -1,20 +1,29 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import Image from "next/image";
-
-
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import {
-  faShoppingCart,
-  faEye,
-  faHeart,
-} from "@fortawesome/free-solid-svg-icons";
 import Link from "next/link";
-const Card = ({ id,title, price, category, image, className }) => {
+import { useDispatch } from "react-redux";
+import { initializeCount } from "@/feature/productsSlice";
+import {
+  MdRemoveShoppingCart,
+  MdShoppingCart,
+  MdRemoveRedEye,
+} from "react-icons/md";
+import { VscHeartFilled } from "react-icons/vsc";
+const Card = ({
+  id,
+  title,
+  price,
+  category,
+  image,
+  handleAddDeleteCart,
+  item,
+  isProductInStorage,
+  handleAddDeleteWishList,
+  isProductWishListInStorage,
+}) => {
   return (
     <>
-      <div
-        className={`${className}  justify-center w-[250px] max-w-[100%]  text-center mx-auto p-[15px]  border-[#ccc] border-[3px] border-solid  xl:col-span-3  lg:col-span-4 sm:col-span-6 col-span-12   hover:border-first-color duration-300 `}
-      >
+      <div className="  justify-center w-[250px] max-w-[100%]  text-center mx-auto p-[15px]  border-[#ccc] border-[3px] border-solid  xl:col-span-3  lg:col-span-4 sm:col-span-6 col-span-12   hover:border-first-color duration-300 ">
         <div className={`flex justify-center items-center h-[200px] w-full`}>
           <Image
             src={image}
@@ -29,19 +38,42 @@ const Card = ({ id,title, price, category, image, className }) => {
           <p className="text-[15px] font-[500]">{title?.slice(0, 25)}...</p>
           <p className="text-first-color  font-bold text-[20px]">${price}</p>
         </div>
-        <div className="product-btns">
+        <div className="product-btns flex justify-center items-center">
           <button>
-            <FontAwesomeIcon icon={faHeart} className="card-icon " />
-            <span className="tooltipp">add to wishlist</span>
+            <VscHeartFilled
+              className={`card-icon m-auto text-[20px] ${
+                isProductWishListInStorage &&  isProductWishListInStorage(id) ? "red" : ""
+              }`}
+              onClick={() => handleAddDeleteWishList(item)}
+            />
+            <span className="tooltipp">
+              {" "}
+              {isProductWishListInStorage && isProductWishListInStorage(id)
+                ? "Delete from WishList"
+                : "Add to wishList"}
+            </span>
           </button>
           <button>
-            <FontAwesomeIcon icon={faShoppingCart} className="card-icon" />
-            <span className="tooltipp">add to card</span>
+            {isProductInStorage && isProductInStorage(id) ? (
+              <MdRemoveShoppingCart
+                className={`card-icon m-auto text-[20px] red`}
+                onClick={() => handleAddDeleteCart(item)}
+              />
+            ) : (
+              <MdShoppingCart
+                className={`card-icon m-auto text-[20px]`}
+                onClick={() => handleAddDeleteCart(item)}
+              />
+            )}
+            <span className="tooltipp">
+              {isProductInStorage && isProductInStorage(id)
+                ? "Delete from cart"
+                : "Add to cart"}
+            </span>
           </button>
-
           <button>
             <Link href={`/products/${id}`}>
-              <FontAwesomeIcon icon={faEye} className="card-icon" />
+              <MdRemoveRedEye className="card-icon m-auto text-[20px]" />
               <span className="tooltipp">quick view</span>
             </Link>
           </button>
@@ -58,6 +90,10 @@ const Card = ({ id,title, price, category, image, className }) => {
             button:hover .card-icon {
               color:#D10024;
             }
+
+            .red{
+              color:red !important;
+            }
           `}
       </style>
     </>
@@ -65,3 +101,7 @@ const Card = ({ id,title, price, category, image, className }) => {
 };
 
 export default Card;
+
+// {
+//   productExists ? "Delete from cart" : "Add to cart";
+// }

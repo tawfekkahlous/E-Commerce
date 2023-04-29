@@ -1,5 +1,4 @@
 import React from "react";
-import { TiSocialFacebook } from "react-icons/fa";
 const Icon = ({
   className,
   icon,

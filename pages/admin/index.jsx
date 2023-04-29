@@ -12,9 +12,13 @@ import {
 import { toast } from "react-toastify";
 import Loader from "@/components/loader";
 import { useLazyGetProductDetailsQuery } from "@/api/product-api/admin";
+import { CiBluetooth } from "react-icons/ci";
+import { icon } from "@fortawesome/fontawesome-svg-core";
 const Index = () => {
   const [popup, setPopup] = useState(false);
+  const [openDeletePopup, setOpenDeletePopup] = useState(false);
   const [mode, setMode] = useState("add");
+  const [idDelete,setIdDelete]=useState(null)
   const handleOpen = () => {
     setMode("add");
     setPopup(!popup);
@@ -38,12 +42,13 @@ const Index = () => {
     deleteProduct({ id: item.id });
     const newData = pro.filter((el) => el.id !== item.id);
     setPro(newData);
+    setOpenDeletePopup(false)
   };
   useEffect(() => {
     if (isSuccessDeleteProduct) {
       toast.success("Delete Successfully", {
         position: "top-right",
-        autoClose: 5000,
+        autoClose: 2000,
         hideProgressBar: false,
         closeOnClick: true,
         pauseOnHover: true,
@@ -109,6 +114,11 @@ const Index = () => {
       });
     }
   }, [isSuccessAddProduct]);
+
+  const handleDeleteItem = (item) => {
+    setOpenDeletePopup(true);
+    setIdDelete(item)
+  };
   return (
     <>
       {isLoading ? (
@@ -133,7 +143,6 @@ const Index = () => {
             border={"3px solid #2196F3"}
             onClick={handleOpen}
           />
-
           <div className="relative overflow-x-auto ">
             <table className="w-full text-sm text-left  ">
               <thead className="text-xs  uppercase bg-gray-50  ">
@@ -160,56 +169,103 @@ const Index = () => {
               </thead>
               <tbody className="">
                 {pro?.map((item, key) => (
-                  <tr key={key} className="bg-white border-b   ">
-                    <th className="text-center"> {item.id} </th>
-                    <th
-                      scope="row"
-                      className="px-6 py-4 font-medium  whitespace-nowrap "
-                    >
-                      {item.title.slice(0, 30)}...
-                    </th>
-                    <td className="px-6 py-4 ">{item.price}$</td>
-                    <td className="px-6 py-4 ">{item.category}</td>
-                    <td className="px-6 py-4 ">
-                      {item?.description.slice(0, 30)}...
-                    </td>
-                    <td className="px-6 py-4 flex justify-between ">
-                      <Button
-                        bg={"green"}
-                        borderRadius={"10px"}
-                        text={result.isLoading ? "Loading..." : "Edit"}
-                        className={"edit"}
-                        color={"white"}
-                        fontWeight={"bold"}
-                        width={"40%"}
-                        padding={"10px"}
-                        margin={"0px 10px"}
-                        onClick={() => handleEdit(item.id)}
-                      />
-                      <Button
-                        bg={"red"}
-                        borderRadius={"10px"}
-                        text={"Delete"}
-                        className={"delete"}
-                        color={"white"}
-                        fontWeight={"bold"}
-                        width={"40%"}
-                        padding={"10px"}
-                        onClick={() => handleDelete(item)}
-                        margin={"0px 10px"}
-                      />
-                    </td>
-                  </tr>
+                  <>
+                    <tr key={key} className="bg-white border-b   ">
+                      <th className="text-center"> {item.id} </th>
+                      <th
+                        scope="row"
+                        className="px-6 py-4 font-medium  whitespace-nowrap "
+                      >
+                        {item.title.slice(0, 30)}...
+                      </th>
+                      <td className="px-6 py-4 ">{item.price}$</td>
+                      <td className="px-6 py-4 ">{item.category}</td>
+                      <td className="px-6 py-4 ">
+                        {item?.description.slice(0, 30)}...
+                      </td>
+                      <td className="px-6 py-4 flex justify-between ">
+                        <Button
+                          bg={"green"}
+                          borderRadius={"10px"}
+                          text={result.isLoading ? "Loading..." : "Edit"}
+                          className={"edit"}
+                          color={"white"}
+                          fontWeight={"bold"}
+                          width={"40%"}
+                          padding={"10px"}
+                          margin={"0px 10px"}
+                          onClick={() => handleEdit(item.id)}
+                        />
+                        <Button
+                          bg={"red"}
+                          borderRadius={"10px"}
+                          text={"Delete"}
+                          className={"delete"}
+                          color={"white"}
+                          fontWeight={"bold"}
+                          width={"40%"}
+                          padding={"10px"}
+                          // onClick={() => handleDelete(item)}
+                          onClick={() => handleDeleteItem(item)}
+                          margin={"0px 10px"}
+                        />
+                      </td>
+                    </tr>
+                  </>
                 ))}
               </tbody>
             </table>
           </div>
+          <Popup
+            isOpen={openDeletePopup}
+            handleToogle={() => setOpenDeletePopup(false)}
+            height={"150px"}
+            smWidth={"300px"}
+            titlePopup={"Are you sure?"}  
+            headerColor={"#D10024"}
+            marginTop={"10px"}
+            padding={"15px 30px"}
+            center={"center"}
+          >
+            <p className="capitalize mb-[25px] font-[500]">
+              you are about delete this product.
+            </p>
+            <div className="flex justify-between">
+              <Button
+                className={"yes"}
+                text={"Yes"}
+                onClick={() => handleDelete(idDelete)}
+                bg={"#D10024"}
+                color={"white"}
+                padding={"10px 40px"}
+                borderRadius={"5px"}
+                fontWeight={"600"}
+                margin={"auto 20px "}
+
+
+              />
+              <Button
+                className={"no"}
+                text={"No"}
+                onClick={() => setOpenDeletePopup(false)}
+                bg={"#bbb"}
+                color={"white"}
+                padding={"10px 40px"}
+                borderRadius={"5px"}
+              />
+            </div>
+          </Popup>
 
           <Popup
             isOpen={popup}
             handleToogle={handleOpen}
             mode={mode}
             titlePopup={result.data ? "Update Product" : "Add Product"}
+            height={"auto"}
+            smWidth={"400px"}
+            borderbottom={" 2px solid #423e3e"}
+            icon={icon}
+            marginTop={"25px"}
           >
             <div className="py-3 px-5">
               <Formik
