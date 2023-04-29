@@ -18,15 +18,17 @@ const Index = () => {
   const [popup, setPopup] = useState(false);
   const [openDeletePopup, setOpenDeletePopup] = useState(false);
   const [mode, setMode] = useState("add");
-  const [idDelete,setIdDelete]=useState(null)
+  const [idDelete, setIdDelete] = useState(null);
   const handleOpen = () => {
     setMode("add");
     setPopup(!popup);
     setDataFromResult(null);
   };
   const { data, isLoading, isSuccess } = useGetAllProductsQuery();
-  const [deleteProduct, { isSuccess: isSuccessDeleteProduct }] =
-    useDeleteProductMutation();
+  const [
+    deleteProduct,
+    { isSuccess: isSuccessDeleteProduct, isLoading: isLoadingDelete, reset },
+  ] = useDeleteProductMutation();
   const [addProduct, { isSuccess: isSuccessAddProduct, data: productData }] =
     useAddProdutMutation();
   const [edit, { isSuccess: isSuccessUpdateProduct }] =
@@ -42,8 +44,15 @@ const Index = () => {
     deleteProduct({ id: item.id });
     const newData = pro.filter((el) => el.id !== item.id);
     setPro(newData);
-    setOpenDeletePopup(false)
   };
+
+  useEffect(() => {
+    if (isSuccessDeleteProduct) {
+      setOpenDeletePopup(false);
+      reset();
+    }
+  }, [isSuccessDeleteProduct]);
+
   useEffect(() => {
     if (isSuccessDeleteProduct) {
       toast.success("Delete Successfully", {
@@ -117,7 +126,7 @@ const Index = () => {
 
   const handleDeleteItem = (item) => {
     setOpenDeletePopup(true);
-    setIdDelete(item)
+    setIdDelete(item);
   };
   return (
     <>
@@ -221,7 +230,7 @@ const Index = () => {
             handleToogle={() => setOpenDeletePopup(false)}
             height={"150px"}
             smWidth={"300px"}
-            titlePopup={"Are you sure?"}  
+            titlePopup={"Are you sure?"}
             headerColor={"#D10024"}
             marginTop={"10px"}
             padding={"15px 30px"}
@@ -233,7 +242,7 @@ const Index = () => {
             <div className="flex justify-between">
               <Button
                 className={"yes"}
-                text={"Yes"}
+                text={`${isLoadingDelete ? "isLoading.." : "Yes"}`}
                 onClick={() => handleDelete(idDelete)}
                 bg={"#D10024"}
                 color={"white"}
@@ -241,8 +250,6 @@ const Index = () => {
                 borderRadius={"5px"}
                 fontWeight={"600"}
                 margin={"auto 20px "}
-
-
               />
               <Button
                 className={"no"}

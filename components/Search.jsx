@@ -3,7 +3,7 @@ import { VscHeartFilled, VscThreeBars } from "react-icons/vsc";
 import { MdShoppingCart } from "react-icons/md";
 import Link from "next/link";
 import { useSelector, useDispatch } from "react-redux";
-import { initializeCount, initializeCounter, setSearchTerm } from "@/feature/productsSlice";
+import { initializeCount, initializeCounter, setOpenAside, setSearchTerm } from "@/feature/productsSlice";
 import { useEffect } from "react";
 const Search = ({ handleToogle }) => {
   const { count, searchTerm,counter } = useSelector((state) => state.products);
@@ -17,7 +17,7 @@ const Search = ({ handleToogle }) => {
   };
 
   return (
-    <div className="bg-second-color py-2 border-b-[2px] border-first-color sticky top-0 left-0 z-[997]">
+    <div className="bg-second-color py-2 border-b-[2px] border-first-color sticky top-[40px] left-0 z-[997]">
       <div className="wrapper lg:grid lg:grid-cols-12 lg:gap-x-4  flex flex-col items-center">
         <div className=" lg:col-span-3 grid-cols-4 ">
           <Image
@@ -43,7 +43,10 @@ const Search = ({ handleToogle }) => {
         </div>
 
         <div className="lg:col-span-3 flex justify-end grid-cols-4">
-          <div className="inline-block py-4">
+          <div
+            className="inline-block py-4"
+            onClick={() => dispatch(setOpenAside())}
+          >
             <a href="#" className="text-white block w-24 text-center title ">
               <VscHeartFilled className="text-md  block m-auto text-[20px]" />
               <span className="text-xs block">Your Wishlist</span>

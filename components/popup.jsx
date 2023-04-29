@@ -40,7 +40,7 @@ const Popup = ({
 
             <div className={`mt-[${marginTop}] `}>{children}</div>
           </div>
-          <div className="overlay" onClick={handleToogle}></div>
+      
           <style>
             {`  
             body {

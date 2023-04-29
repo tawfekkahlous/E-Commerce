@@ -5,9 +5,9 @@ import { dataLeft,dataRight } from "@/data/header-data/header-data";
 
 const Header = () => {
   return (
-    <div className="py-2 bg-header-color">
+    <div className="py-2 bg-header-color sticky top-0 left-0 z-[997]">
       <div className="wrapper ">
-        <div className="flex  sm:items-center md:justify-between md:flex-row text-white ">
+        <div className="flex  sm:items-center md:justify-between md:flex-row text-white  ">
           <ul className=" sm:flex sm:justify-start ">
             {dataLeft.map((item, key) => {
               return (

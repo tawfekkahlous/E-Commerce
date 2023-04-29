@@ -14,6 +14,9 @@ import Icon from "@/components/icon";
 import { CiUser } from "react-icons/ci";
 import { useLoginMutation } from "@/api/product-api/auth";
 import Divider from "@/components/break";
+
+import { AiOutlineCopy } from "react-icons/ai";
+
 const Login = () => {
   const router = useRouter();
   const [lock, setLock] = useState(true);
@@ -27,9 +30,22 @@ const Login = () => {
       router.push("/home");
     }
   }, [data, isSuccess, router]);
+
+  const [useranem, setUsername] = useState("mor_2314");
+  const copyUsername = async () => {
+    await navigator.clipboard.writeText(useranem);
+    alert("Text copied");
+  };
+
+  const [password, setPassword] = useState("83r5^_");
+  const copyPassword = async () => {
+    await navigator.clipboard.writeText(password);
+    alert("Text copied");
+  };
+
   return (
     <div className="flex justify-center items-center h-screen w-full">
-      <div className="w-[400px] h-[550px]  py-[30px] px-[40px] rounded-md bg-white shadow-md m-auto my-[20px] ">
+      <div className="w-[400px] h-auto  py-[30px] px-[40px] rounded-md bg-white shadow-md m-auto my-[20px] ">
         <h1 className="font-[500] text-[22px]"> Login</h1>
         <div className="mt-[25px] ">
           <Formik
@@ -133,7 +149,7 @@ const Login = () => {
           bgAfter={"white"}
           borderAfter={"1px solid #ccc"}
         />
-        <div className="flex justify-center gap-4 mb-[30px]">
+        <div className="flex justify-center gap-4 mb-[10px]">
           <Icon
             className={"faceIcon"}
             icon={<TiSocialFacebook />}
@@ -174,7 +190,42 @@ const Login = () => {
             colorHover={"white"}
           />
         </div>
+        <div className="">
+          <div className="flex items-center justify-between">
+            <p> username : </p>
+            <input
+              type="text"
+              disabled
+              className="bg-white w-[120px]"
+              value={useranem}
+            />
+            <button
+              onClick={copyUsername}
+              className="flex items-center justify-center w-[40px] h-[40px] rounded-full hover:bg-[rgba(0,0,0,0.1)] text-[18px]"
+            >
+              <AiOutlineCopy />
+            </button>
+          </div>
+          <div>
+            <div className="flex items-center justify-between gap-2">
+                <p> Password : </p>
+                <input
+                  type="text"
+                  disabled
+                  className="bg-white w-[120px]"
+                  value={password}
+                />
+              <button
+                onClick={copyPassword}
+                className="flex items-center justify-center w-[40px] h-[40px] rounded-full hover:bg-[rgba(0,0,0,0.1)] text-[18px]"
+              >
+                <AiOutlineCopy />
+              </button>
+            </div>
+          </div>
+        </div>
       </div>
+
       <style>
         {`
         body{

@@ -33,7 +33,7 @@ export default function Home() {
       );
       localStorage.setItem("myArray", JSON.stringify(updatedArray));
       dispatch(setCount(updatedArray.length));
-    }
+    } 
   };
 
   const isProductInStorage = (id) => {
@@ -72,7 +72,7 @@ export default function Home() {
         <Loader />
       ) : (
         <>
-          {filteredProducts.length > 0 ? (
+          {filteredProducts?.length > 0 ? (
             <div className="grid grid-cols-12 sm:gap-x-8 sm:gap-y-8  gap-y-8 py-8 wrapper">
               {filteredProducts?.map((item) => {
                 return (

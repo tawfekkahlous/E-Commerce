@@ -39,12 +39,13 @@ const Card = ({
           <p className="text-first-color  font-bold text-[20px]">${price}</p>
         </div>
         <div className="product-btns flex justify-center items-center">
-          <button>
+          <button onClick={() => handleAddDeleteWishList(item)}>
             <VscHeartFilled
               className={`card-icon m-auto text-[20px] ${
-                isProductWishListInStorage &&  isProductWishListInStorage(id) ? "red" : ""
+                isProductWishListInStorage && isProductWishListInStorage(id)
+                  ? "red"
+                  : ""
               }`}
-              onClick={() => handleAddDeleteWishList(item)}
             />
             <span className="tooltipp">
               {" "}

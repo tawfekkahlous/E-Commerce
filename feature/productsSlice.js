@@ -6,6 +6,7 @@ const productsSlice = createSlice({
     count: 0,
     searchTerm: "",
     counter: 0,
+    openAside:false
   },
   reducers: {
     setCount(state, action) {
@@ -25,9 +26,12 @@ const productsSlice = createSlice({
     setSearchTerm(state, action) {
       state.searchTerm = action.payload;
     },
+    setOpenAside(state) {
+      state.openAside=!state.openAside
+    },
   },
 });
 
-export const { setCount, initializeCount, setSearchTerm, initializeCounter,setCounter } =
+export const { setCount, initializeCount, setSearchTerm, initializeCounter,setCounter,setOpenAside } =
   productsSlice.actions;
 export default productsSlice.reducer;

@@ -18,7 +18,7 @@ const Index = () => {
   };
 
   const handleRemove = (id) => {
-    let indexToRemove = myArray.findIndex((item) => item.id === id);
+    let indexToRemove = myArray.findIndex((item) => item?.id === id);
     let newArray = [...myArray];
     newArray.splice(indexToRemove, 1);
     setMyArrayOfProducts(newArray);
@@ -49,7 +49,7 @@ const Index = () => {
             {myArray?.map((item) => {
               return (
                 <div
-                  key={item.key}
+                  key={item?.key}
                   className=" justify-center w-[250px] max-w-[100%]  text-center mx-auto p-[15px]  border-[#ccc] border-[3px] border-solid  xl:col-span-3  lg:col-span-4 sm:col-span-6 col-span-12   hover:border-first-color duration-300 "
                 >
                   <div
@@ -64,7 +64,7 @@ const Index = () => {
                     />
                   </div>
                   <p className=" font-[bold] text-[25px] text-first-color my-[10px]">
-                    ${item.price}
+                    ${item?.price}
                   </p>
                   <Button
                     text={"Delete From Cart"}
@@ -76,7 +76,7 @@ const Index = () => {
                     color={"black"}
                     borderRadius={"10px"}
                     margin={"15px auto"}
-                    onClick={() => handleRemove(item.id)}
+                    onClick={() => handleRemove(item?.id)}
                   />
                 </div>
               );
