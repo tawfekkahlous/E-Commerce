@@ -1,37 +1,38 @@
-import {
-  faPhone,
-  faEnvelope,
-  faMapMarker,
-  faDollar,
-  faUser,
-} from "@fortawesome/free-solid-svg-icons";
-
-
+// import {
+//   faPhone,
+//   faEnvelope,
+//   faMapMarker,
+//   faDollar,
+//   faUser,
+// } from "@fortawesome/free-solid-svg-icons";
+import { FiPhone } from "react-icons/fi";
+import { FaRegEnvelope, FaMapMarkerAlt, FaRegUser } from "react-icons/fa";
+import { BsCurrencyDollar } from "react-icons/bs";
 export const dataLeft = [
   {
-    icon: faPhone,
+    icon: <FiPhone/>,
     text: "+963 943 537 522",
     link: "#",
   },
   {
-    icon: faEnvelope,
+    icon: <FaRegEnvelope/>,
     text: "tawfek96Kahlous@gmail.com",
     link: "#",
   },
   {
-    icon: faMapMarker,
+    icon: <FaMapMarkerAlt/>,
     text: "Syria-Damascus",
     link: "#",
   },
 ];
 export const dataRight = [
   {
-    icon: faDollar,
+    icon: <BsCurrencyDollar/>,
     text: "USD",
     link: "#",
   },
   {
-    icon: faUser,
+    icon: <FaRegUser/>,
     text: "My Account",
     link: "#",
   },

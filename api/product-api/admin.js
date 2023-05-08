@@ -8,6 +8,7 @@ const extendedApi = apiSlice.injectEndpoints({
       }),
     }),
   }),
+  overrideExisting: true,
 });
 
 export const {useLazyGetProductDetailsQuery} = extendedApi;

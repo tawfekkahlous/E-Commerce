@@ -34,21 +34,23 @@ const Aside = () => {
     <>
       {wishList?.length > 0 ? (
         <div className={`wish-list open`}>
-          <div className=" flex justify-between items-center ">
-            <h2 className="font-[600] hover:text-first-color transition-[0.3s]">
+          <div className=" flex justify-between items-center p-[20px]   border-b-[2px]  border-b-[#ccc] ">
+            <h2 className="font-[600] hover:text-first-color transition-[0.3s] ">
               {" "}
               My WishList
             </h2>
-            <BsArrowRight
+            <div
+              className="w-[40px] h-[40px] rounded-[50%] hover:bg-[#f7f7f7] flex justify-center items-center cursor-pointer  "
               onClick={() => dispatch(setOpenAside())}
-              className=" cursor-pointer text-[20px] "
-            />
+            >
+              <BsArrowRight className=" text-[20px]  " />
+            </div>
           </div>
           {wishList?.map((item) => {
             return (
               <div
                 key={item?.key}
-                className="flex flex-col items-center border-b-[2px]  border-b-[#ccc] py-[20px]"
+                className="flex flex-col items-center border-b-[2px]  border-b-[#ccc] p-[20px]"
               >
                 <div
                   className={`flex justify-center items-center h-[200px] w-full`}
@@ -68,7 +70,7 @@ const Aside = () => {
                   text={"Delete From WishList"}
                   bg={"#ccc"}
                   border={"2px solid #ccc"}
-                  className={"delete"}
+                  className={"wish-list"}
                   padding={"5px 20px"}
                   width={"fit-content"}
                   color={"black"}
@@ -90,7 +92,7 @@ const Aside = () => {
               text={"Delete All WishList"}
               bg={"#ccc"}
               border={"2px solid #ccc"}
-              className={"delete"}
+              className={"wish-list-all"}
               padding={"5px 20px"}
               width={"fit-content"}
               color={"black"}
@@ -102,7 +104,6 @@ const Aside = () => {
               borderHover={"2px solid #D10024"}
               fontWeight={"500"}
               dispaly={"block"}
-
             />
           )}
         </div>
@@ -118,7 +119,7 @@ const Aside = () => {
           height :100vh;
           right:${openAside ? "0" : "-200%"};
           background: #fff;
-          padding : 20px;
+          // padding : 20px;
           overflow-y: auto;
           width : 400px;
           z-index:10000;

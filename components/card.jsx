@@ -1,8 +1,6 @@
 import React, { useEffect, useState } from "react";
 import Image from "next/image";
 import Link from "next/link";
-import { useDispatch } from "react-redux";
-import { initializeCount } from "@/feature/productsSlice";
 import {
   MdRemoveShoppingCart,
   MdShoppingCart,

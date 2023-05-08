@@ -15,7 +15,7 @@ const Menu = ({ menu, handleToogle }) => {
       <div className="py-2 md:border-b-[#E4E7ED] md:border-[2px] ">
         <div className="wrapper menu md:flex justify-between flex-col md:flex-row ">
           <ul className="md:text-black  text-white md:flex gap-[20px] block navbar nav w-[100%]">
-            {navbarData.map((item, key) => {
+            {/* {navbarData.map((item, key) => {
               return (
                 <Li
                   key={key}
@@ -24,7 +24,48 @@ const Menu = ({ menu, handleToogle }) => {
                   link={item.link}
                 />
               );
-            })}
+            })} */}
+
+            <li className="ml-[10px]">
+              <Link
+                className="text-xs hover:text-first-color hover:duration-500 "
+                href="/home"
+              >
+                home
+              </Link>
+            </li>
+            <li className="ml-[10px]">
+              <Link
+                className="text-xs hover:text-first-color hover:duration-500 "
+                href="/category/electronics"
+              >
+                Electronics
+              </Link>
+            </li>
+            <li className="ml-[10px]">
+              <Link
+                className="text-xs hover:text-first-color hover:duration-500 "
+                href="/category/jewelery"
+              >
+                Jewelery
+              </Link>
+            </li>
+            <li className="ml-[10px]">
+              <Link
+                className="text-xs hover:text-first-color hover:duration-500 "
+                href="/category/men's clothing"
+              >
+                Men&apos;s clothing
+              </Link>
+            </li>
+            <li className="ml-[10px]">
+              <Link
+                className="text-xs hover:text-first-color hover:duration-500 "
+                href="/category/women's clothing"
+              >
+                Women&apos;s clothing
+              </Link>
+            </li>
           </ul>
           <div className="flex justify-between text-white md:text-black ">
             <Link href={"/admin"}>

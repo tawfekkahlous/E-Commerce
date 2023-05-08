@@ -11,7 +11,7 @@ import {
 } from "@/api/product-api/product-api";
 import { toast } from "react-toastify";
 import Loader from "@/components/loader";
-import { useLazyGetProductDetailsQuery } from "@/api/product-api/admin";
+import { useLazyGetProductDetailsQuery} from "@/api/product-api/admin";
 import { CiBluetooth } from "react-icons/ci";
 import { icon } from "@fortawesome/fontawesome-svg-core";
 const Index = () => {
@@ -51,7 +51,7 @@ const Index = () => {
       setOpenDeletePopup(false);
       reset();
     }
-  }, [isSuccessDeleteProduct]);
+  }, [isSuccessDeleteProduct,reset]);
 
   useEffect(() => {
     if (isSuccessDeleteProduct) {

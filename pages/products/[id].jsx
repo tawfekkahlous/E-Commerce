@@ -5,15 +5,15 @@ import Loader from "@/components/loader";
 import Image from "next/image";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faStar, faHeart } from "@fortawesome/free-solid-svg-icons";
-import { setCount } from "@/feature/productsSlice";
+import { setCount, setCounter } from "@/feature/productsSlice";
 import { useDispatch } from "react-redux";
 const ProductInfo = () => {
   const [readMore, setReadMore] = useState(false);
+  const [isFounded, setIsFounded] = useState(false);
   const dispatch = useDispatch();
   const router = useRouter();
   const id = router.query;
   const { data, isLoading, isSuccess } = useGetProductDetailsQuery(id);
-
   const handleAddDeleteCart = (item) => {
     const myArray = JSON.parse(localStorage.getItem("myArray")) || [];
     const productExists = myArray.some((product) => product?.id === item?.id);
@@ -28,11 +28,35 @@ const ProductInfo = () => {
       localStorage.setItem("myArray", JSON.stringify(updatedArray));
       dispatch(setCount(updatedArray.length));
     }
+    setIsFounded(!isFounded);
   };
   const isProductInStorage = (id) => {
     const myArray = JSON.parse(localStorage.getItem("myArray")) || [];
     return myArray.some((product) => product?.id === id);
   };
+  const handleAddDeleteWishList = (item) => {
+    const wishList = JSON.parse(localStorage.getItem("wishList")) || [];
+    const productExists = wishList.some((product) => product?.id === item?.id);
+    if (!productExists) {
+      wishList.push(item);
+      localStorage.setItem("wishList", JSON.stringify(wishList));
+      dispatch(setCounter(wishList.length));
+    } else {
+      const updatedWishList = wishList.filter(
+        (product) => product?.id !== item?.id
+      );
+      localStorage.setItem("wishList", JSON.stringify(updatedWishList));
+      dispatch(setCounter(updatedWishList.length));
+    }
+    setIsFounded(!isFounded);
+  };
+
+  const isProductWishListInStorage = (id) => {
+    const wishList = JSON.parse(localStorage.getItem("wishList")) || [];
+    return wishList.some((product) => product?.id === id);
+  };
+
+  console.log("fffff");
   return (
     <>
       {isLoading ? (
@@ -41,16 +65,20 @@ const ProductInfo = () => {
         <div className="w-full max-h-[1000px] sm:bg-[#f7f7f7] flex justify-center items-center py-[30px] ">
           <div className="md:flex  md:items-center md:flex-row gap-4 shadow-xl p-[20px] bg-white lg:w-8/12 md:10/12 w-full rounded-xl flex-col mx-[20px] ">
             <div className="flex justify-center items-center mb-[20px] md:w-[20%] w-full md:mb-[0px]">
-              <Image src={data?.image} alt="image" width={1000} height={200} />
+              <Image src={data?.image} alt="image" width={200} height={200} />
               {/* <img src={data?.image} alt="image" className="w-[200px]" /> */}
             </div>
             <div className="md:w-[80%] w-full">
               <div className="flex justify-between items-start">
                 <p className="font-bold text-[25px] "> {data?.title}</p>
-                <FontAwesomeIcon
-                  icon={faHeart}
-                  className="card-icon text-[#a19a9a] hover:text-first-color duration-300 cursor-pointer"
-                />
+                <button onClick={() => handleAddDeleteWishList(data)} className="w-[40px] h-[40px] rounded-[50%] hover:bg-[#f7f7f7]">
+                  <FontAwesomeIcon
+                    icon={faHeart}
+                    className={` card-icon duration-300 cursor-pointer  ${
+                      isProductWishListInStorage(data?.id) ? "red" : "gray"
+                    }`}
+                  />
+                </button>
               </div>
               <p className="text-[#2196F3] font-bold border-[2px] border-[#eee] border-[solid] w-fit p-[6px] capitalize rounded-md my-[10px]">
                 {data?.category}
@@ -109,8 +137,8 @@ const ProductInfo = () => {
                   className={`text-[#2196F3] py-[8px] px-[8px] border-[2px] border-[#2196F3] border-[solid] rounded-md text-[16px] font-[500] hover:text-white hover:bg-[#2196F3] duration-300  `}
                 >
                   {isProductInStorage && isProductInStorage(data?.id)
-                    ? ("Delete From Cart")
-                    : ("Add to cart")}
+                    ? "Delete From Cart"
+                    : "Add to cart"}
                 </button>
                 {/* <button
                   onClick={handleOpen}
@@ -123,6 +151,26 @@ const ProductInfo = () => {
           </div>
         </div>
       )}
+      <style>
+        {`
+         .card-icon{
+                color: rgb(58, 56 ,56 ,.58);
+                transtion:0.3s;
+                z-index:-1
+
+            }
+            button:hover .card-icon {
+              color:#D10024;
+            }
+            .red{
+              color:red !important;
+            }
+            .gray {
+              color:#777 !important;
+            } 
+            
+            `}
+      </style>
     </>
   );
 };

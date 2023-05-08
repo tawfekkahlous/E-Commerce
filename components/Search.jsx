@@ -25,6 +25,7 @@ const Search = ({ handleToogle }) => {
             alt="Landscape picture"
             width={150}
             height={150}
+            priority={true}
           />
         </div>
 
@@ -47,11 +48,11 @@ const Search = ({ handleToogle }) => {
             className="inline-block py-4"
             onClick={() => dispatch(setOpenAside())}
           >
-            <a href="#" className="text-white block w-24 text-center title ">
+            <Link href="#" className="text-white block w-24 text-center title ">
               <VscHeartFilled className="text-md  block m-auto text-[20px]" />
               <span className="text-xs block">Your Wishlist</span>
               <div>{counter}</div>
-            </a>
+            </Link>
           </div>
 
           <div className="inline-block py-4 mr-[-15px]">
@@ -69,10 +70,13 @@ const Search = ({ handleToogle }) => {
             className="inline-block py-4 md:hidden cursor-pointer"
             onClick={handleToogle}
           >
-            <a className="text-white block w-24 text-center title">
+            <Link
+              href={"#"}
+              className="text-white block w-24 text-center title"
+            >
               <VscThreeBars className="text-md  block m-auto text-[20px]" />
               <span className="text-xs block ">Menu</span>
-            </a>
+            </Link>
           </div>
         </div>
       </div>
